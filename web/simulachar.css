@@ -1,0 +1,43 @@
+
+body {
+  background-color: #F8F8F8;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.2em;
+  margin: 15px;
+}
+
+h1, p {
+  color: #333;
+}
+
+#wrapper {
+  width: 1200px;
+}
+
+.clear {
+  clear: both;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right
+}
+
+#controls {
+  width: 250px;
+}
+
+#log {
+  margin-left: 50px;
+  width: 250px;
+}
+
+.activeWeapon {
+  color: #ff3333;
+  font-weight: bold;
+}
