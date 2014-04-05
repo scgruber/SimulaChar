@@ -94,10 +94,14 @@ class Character {
   }
 }
 
+// A display representation for a character in the map.
 class Token {
+  /// The parent SVG element containing the token.
   SVG.GElement token;
+  /// The location of the token.
   MATH.Point pos;
   
+  /// Creates a new token.
   Token(String inName, String inColor) {
     token = new SVG.GElement();
     
