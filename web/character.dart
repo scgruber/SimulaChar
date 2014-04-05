@@ -126,31 +126,51 @@ class Token {
   }
 }
 
+// A group of numeric statistics for a character.
 class Stats {
-  // Ability Scores
+  /// The internal representation of the ability scores.
   List<int> abilityScores;
+  /// The Strength ability score.
   int get strScore { return abilityScores[0]; }
+  /// The roll modifier for Strength-based rolls.
   int get strMod { return ((abilityScores[0] - 10) / 2).floor(); }
+  /// The Dexterity ability score.
   int get dexScore { return abilityScores[1]; }
+  /// The roll modifier for Dexterity-based rolls.
   int get dexMod { return ((abilityScores[1] - 10) / 2).floor(); }
+  /// The Intelligence ability score.
   int get intScore { return abilityScores[2]; }
+  /// The roll modifier for Intelligence-based rolls.
   int get intMod { return ((abilityScores[2] - 10) / 2).floor(); }
+  /// The Wisdom ability score.
   int get wisScore { return abilityScores[3]; }
+  /// The roll modifier for Wisdom-based rolls.
   int get wisMod { return ((abilityScores[3] - 10) / 2).floor(); }
+  /// The Constitution ability score.
   int get conScore { return abilityScores[4]; }
+  /// The roll modifier for Constitution-based rolls.
   int get conMod { return ((abilityScores[4] - 10) / 2).floor(); }
+  /// The Charisma ability score.
   int get chaScore { return abilityScores[5]; }
+  /// The roll modifier for Charisma-based rolls.
   int get chaMod { return ((abilityScores[5] - 10) / 2).floor(); }
   
-  // Hit points
+  /// The maximum hit points.
   int maxHitPoints;
+  /// The amount of damage that has been taken.
   int damageTaken;
+  /// The current hit point total.
   int get curHitPoints { return maxHitPoints - damageTaken; }
   
-  // Armor Class
+  /// The armor class
   int get armorClass { return 10 + dexMod; }
   
-  // Constructor
+  /**
+   * Creates a new stat block.
+   * 
+   * Generates ability scores using the "roll 4d6 and drop lowest" method.
+   * Hit point maximum is currently for a first level fighter.
+   */
   Stats() {
     abilityScores = new List(6);
     // Roll 4d6 and drop lowest for each stat
