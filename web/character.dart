@@ -192,14 +192,23 @@ class Stats {
   }
 }
 
+/// A collection of the gear held by a character.
 class Gear {
+  /// The held items.
   List<Equipment> possessions;
+  /**
+   * The weapon that is currently in use.
+   * 
+   * If this value is null, use the `unarmed` object.
+   */
   Weapon activeWeapon;
   
+  /// Creates a new gear collection.
   Gear() {
     possessions = new List<Equipment>();
   }
   
+  /// The total weight of items held.
   num get weight {
     num total = 0;
     for (Equipment obj in possessions) {
@@ -208,10 +217,12 @@ class Gear {
     return total;
   }
   
+  /// Adds to the gear.
   void add(Equipment equip) {
     possessions.add(equip);
   }
   
+  /// Sets the active weapon.
   void setWeapon(Equipment equip) {
     if (possessions.contains(equip)) {
       activeWeapon = equip;
@@ -220,6 +231,7 @@ class Gear {
     }
   }
   
+  /// Unsets the currently active weapon.
   void clearWeapon() {
     activeWeapon = null;
   }
