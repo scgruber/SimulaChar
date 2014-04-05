@@ -36,4 +36,10 @@ class Initiative {
     if (!added) { chars.add(char); }
     makeLog(char.name + " rolled initiative : " + initiative.toString());
   }
+  
+  void clear() {
+    chars.clear();
+    inits.clear();
+    now = 0;
+  }
 }

@@ -77,6 +77,12 @@ class Character {
   int get initiative {
     return dTwenty.roll() + stats.dexMod;
   }
+  
+  // Reset hit points & other statuses
+  void reset() {
+    stats.damageTaken = 0;
+    ctrl.updateHitPoints();
+  }
 }
 
 class Token {

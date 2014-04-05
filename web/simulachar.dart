@@ -16,6 +16,7 @@ void main() {
   gInitiative.add(alphonse);
   
   querySelector('#step-forward').addEventListener("click", stepForward);
+  querySelector('#reset').addEventListener("click", resetAll);
 }
 
 void stepForward(Event ev) {
@@ -33,4 +34,12 @@ void stepForward(Event ev) {
   makeLog(logMsg);
   
   gInitiative.advance();
+}
+
+void resetAll(Event ev) {
+  gInitiative.clear();
+  for (Character char in gChars) {
+    char.reset();
+    gInitiative.add(char);
+  }
 }
