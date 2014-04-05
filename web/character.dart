@@ -1,3 +1,4 @@
+/// Classes and methods for characters.
 library sc_character;
 
 import 'dart:math' as MATH;
@@ -9,45 +10,51 @@ import 'equipment.dart';
 import 'dice.dart';
 import 'log.dart' show makeLog;
 
+/// An individual character in the scene.
 class Character {
-  // Properties
+  /// The human-readable name.
   String name;
+  /// The display token.
   Token token;
+  /// The numeric stats.
   Stats stats;
+  /// The gear carried.
   Gear gear;
+  /// The control panel.
   CharControl ctrl;
+  /// The unique identifier.
   int uid;
   
-  // Constructor
+  /// Creates a new character.
   Character(this.name, String inColor) {
-    // Generate UID
     MATH.Random rand = new MATH.Random((new DateTime.now()).millisecondsSinceEpoch);
     uid = rand.nextInt((1<<32)-1);
     
-    // Make the stats
     stats = new Stats();
     
-    // Gear
     gear = new Gear();
     gear.add(greatSword);
     gear.setWeapon(greatSword);
     gear.add(new Money(rand.nextInt(10),rand.nextInt(10),rand.nextInt(10),rand.nextInt(10),rand.nextInt(10)));
     
-    // Make the token
     token = new Token(this.name, inColor);
     
-    // Make the control panel
-    // This MUST BE LAST
+    // This section MUST BE LAST
     ctrl = new CharControl(this);
-    
-    // Add to global list
     gChars.add(this);
   }
   
+  /// The string representation of the UID.
   String get uidString { return uid.toRadixString(36); }
   
-  // Try to make an attack against the target
-  // Returns the amount of damage dealt, or 0 if the attack misses
+  /**
+   * Tries to make an attack against the target.
+   * 
+   * Possible results:
+   * * If the attack is successful, returns the raw damage dealt by the 
+   *   weapon, minimum 1.
+   * * If the attack is unsuccessful, returns 0.
+   */
   int tryAttack(Character target) {
     // Get the weapon
     Weapon theWeapon = null;
@@ -60,12 +67,13 @@ class Character {
     // Make the attack roll
     int attackRoll = dTwenty.roll() + theWeapon.toHitModifier + stats.strMod;
     if (attackRoll > target.stats.armorClass) {
-      return theWeapon.damage + stats.strMod;
+      return MATH.max(theWeapon.damage + stats.strMod, 1);
     } else {
       return 0;
     }
   }
   
+  /// Applies damage dealt to the character.
   void takeDamage(int damage) {
     stats.damageTaken += damage;
     ctrl.updateHitPoints();
@@ -74,11 +82,12 @@ class Character {
     }
   }
   
+  /// The result of an initiative roll.
   int get initiative {
     return dTwenty.roll() + stats.dexMod;
   }
   
-  // Reset hit points & other statuses
+  /// Resets hit points and other status effects.
   void reset() {
     stats.damageTaken = 0;
     ctrl.updateHitPoints();
