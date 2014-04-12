@@ -11,3 +11,7 @@ class MeleeAttackAction implements Action {
     return char.adjacentFoes != [];
   }
 }
+
+class NoAction implements Action {
+  bool isAvailable(Character char) { return true; }
+}
