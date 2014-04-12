@@ -92,6 +92,14 @@ class Character {
     stats.damageTaken = 0;
     ctrl.updateHitPoints();
   }
+  
+  /// The list of foes.
+  List<Character> foes;
+  
+  /// The list of foes adjacent to the character.
+  List<Character> get adjacentFoes {
+    return foes;
+  }
 }
 
 // A display representation for a character in the map.
