@@ -169,6 +169,8 @@ class Stats {
   int damageTaken;
   /// The current hit point total.
   int get curHitPoints { return maxHitPoints - damageTaken; }
+  /// Whether hit points are below half.
+  bool get bloodied { return (damageTaken/maxHitPoints < 0.5); }
   
   /// The armor class
   int get armorClass { return 10 + dexMod; }
